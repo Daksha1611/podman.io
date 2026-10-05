@@ -83,7 +83,7 @@ export const SpeakerDropdown: React.FC<SpeakerDropdownProps> = ({
       {isOpen && (
         <div
           role="listbox"
-          className="no-scrollbar speaker-dropdown-menu absolute right-0 z-50 mt-2 max-h-72 w-64 overflow-y-auto rounded-2xl border border-[#d0ccd8] bg-white p-2 shadow-2xl dark:border-[#443e50] dark:bg-[#1e1d24]"
+          className="no-scrollbar speaker-dropdown-menu absolute right-0 z-50 mt-2 max-h-72 w-64 max-w-[calc(100vw-32px)] overflow-y-auto rounded-2xl border border-[#d0ccd8] bg-white p-2 shadow-2xl dark:border-[#443e50] dark:bg-[#1e1d24]"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           {/* All Speakers Option */}
           <button
