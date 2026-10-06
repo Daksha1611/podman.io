@@ -1,4 +1,5 @@
-import React, { ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import React from 'react';
 import Button from '@site/src/components/utilities/Button/';
 import Markdown from '@site/src/components/utilities/Markdown';
 import FilmIcon from '../../shapes/FilmIcon';
@@ -11,8 +12,8 @@ type SubcardButtonProps = {
 
 type CardInfoButtonProps = {
   data: SubcardButtonProps[];
-  primary: Boolean;
-  method: Function;
+  primary: boolean;
+  method: (button: SubcardButtonProps) => void;
 };
 
 function CardHeader(props) {
@@ -30,9 +31,9 @@ function CardBody(props) {
   const { text } = props;
   return (
     <div className="mx-2 my-6 overflow-y-auto lg:my-8">
-      <p id="cardBody-parsed" className="text-gray-700 dark:text-gray-100">
+      <div id="cardBody-parsed" className="text-gray-700 dark:text-gray-100">
         <Markdown text={text} />
-      </p>
+      </div>
     </div>
   );
 }
@@ -61,7 +62,7 @@ function CardInfoButtons(cardInfoButtonProps: CardInfoButtonProps) {
                 <Button as="link" outline={true} {...button} />
               ) : (
                 <Button
-                  as="button"
+                  as={button.path ? 'link' : 'button'}
                   method={() => {
                     method(button);
                   }}

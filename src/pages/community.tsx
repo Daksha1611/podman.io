@@ -36,7 +36,7 @@ const CommunityLinks = () => {
 
 const CommunityChatSection = (): JSX.Element => {
   return (
-    <section className="bg-gray-50 dark:bg-gradient-to-t dark:from-gray-700 dark:via-gray-900 dark:to-gray-900 ">
+    <section className="bg-gray-50 dark:bg-gradient-to-t dark:from-gray-700 dark:via-gray-900 dark:to-gray-900">
       <SectionHeader textGradient={true} title={communityChat.title} />
       <div className="mx-4 mt-8 flex flex-wrap justify-around gap-4 sm:mx-8 lg:mx-auto lg:mt-16 lg:max-w-6xl">
         <div className="">
@@ -56,18 +56,13 @@ const CommunityChatSection = (): JSX.Element => {
 
 const CommunityMeetingSection = (): JSX.Element => {
   return (
-    <section className="bg-gradient-to-b from-white via-gray-50 to-gray-100 pb-8 dark:from-gray-900 dark:to-gray-900">
+    <section className="bg-white pb-8 dark:bg-gray-900">
       <div className="container flex flex-col">
         <SectionHeader
           title={communityMeetings.title}
           description={communityMeetings.subtitle}
           textGradientStops="from-purple-500 to-purple-700 dark:text-purple-500"
           textGradient={true}
-        />
-        <img
-          src={communityMeetings.image.path}
-          alt={communityMeetings.image.alt}
-          className="order-first mx-auto object-cover lg:max-w-lg"
         />
         <CommunityMeetingsCardGrid cards={communityMeetings.cards} />
       </div>
@@ -77,7 +72,7 @@ const CommunityMeetingSection = (): JSX.Element => {
 
 const MailingListSection = (): JSX.Element => {
   return (
-    <section>
+    <section id="mailing-list">
       <div className="container grid gap-4 lg:grid-cols-2">
         <SectionHeader
           title={mailingList.title}
@@ -106,7 +101,7 @@ const MailingListSection = (): JSX.Element => {
             <img
               src={mailingList.extraInfo.image.path}
               alt={mailingList.extraInfo.image.alt}
-              className="w-full  object-cover"
+              className="w-full object-cover"
             />
           </div>
           <div className="ml-8 xl:ml-10">
@@ -124,8 +119,10 @@ const DropdownContent = (props): JSX.Element => {
       <ul>
         {props.map((link, index) => {
           return (
-            <li className="my-2 rounded-md px-2 transition duration-150 ease-linear hover:bg-purple-700 hover:text-white">
-              <a href={link.path} className=" w-full hover:text-white hover:no-underline">
+            <li
+              key={index}
+              className="my-2 rounded-md px-2 transition duration-150 ease-linear hover:bg-purple-700 hover:text-white">
+              <a href={link.path} className="w-full hover:text-white hover:no-underline">
                 {link.text}
               </a>
             </li>
@@ -225,12 +222,12 @@ function Community() {
       <InfoBanner
         description="**Searching for Podman Desktop Community Meetings?** [Click Here](https://podman-desktop.io/community#community-events) or visit the [official website](https://podman-desktop.io) to learn more."
         image={{
-          src: "logos/optimized/podman-desktop-logo-200w-198h.webp",
-          alt: "Podman Desktop Logo"
+          src: 'logos/optimized/podman-desktop-logo-200w-198h.webp',
+          alt: 'Podman Desktop Logo',
         }}
         styles="bg-purple-700 dark:bg-purple-900 text-white [&_img]:w-16 [&_img]:h-16  [&_a]:underline [&_a:hover]:text-purple-300"
         marginHeight="mt-8 lg:mt-16"
-      /> 
+      />
       <MailingListSection />
       <SubmitIssuesSection />
       <ThankYouSection />

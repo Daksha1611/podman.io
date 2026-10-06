@@ -27,22 +27,20 @@ const PublishDate = ({ date, styles }: { date: string; styles?: string }) => {
     </div>
   );
 };
-const Title = (title: string) => {
-  return <h3 className="text-purple-700">{title}</h3>;
-};
 
 function ArticleCard(props: ArticleCardProps) {
   // Select fallback image based on index, cycling through available images
   const fallbackImage = FALLBACK_IMAGES[(props.index || 0) % FALLBACK_IMAGES.length];
-  
+
   // Sanitizes HTML and converts it to plain text
   const sanitizeHtml = (html: string) => {
     if (!html) return html;
-    const div = document.createElement("div");
+    const div = document.createElement('div');
     div.innerHTML = html;
-    return div.textContent || div.innerText || "";
+    return div.textContent || div.innerText || '';
   };
-  const abbrSubtitle = sanitizeHtml(props.subtitle).trim().split(' ').slice(0, 32).join(' ').concat('...');
+  const subtitleWords = sanitizeHtml(props.subtitle).trim().split(' ');
+  const abbrSubtitle = subtitleWords.slice(0, 32).join(' ') + (subtitleWords.length > 32 ? '...' : '');
   if (props.altLayout) {
     return (
       <article className="my-4 max-w-2xl shadow-lg">
@@ -53,6 +51,7 @@ function ArticleCard(props: ArticleCardProps) {
                 <a
                   href={props.path}
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="text-white no-underline hover:text-blue-100 hover:no-underline dark:text-white dark:hover:text-blue-50">
                   {sanitizeHtml(props.title)}
                 </a>
@@ -61,7 +60,8 @@ function ArticleCard(props: ArticleCardProps) {
             </div>
             <img
               src={props.imgSrc || fallbackImage}
-              className=" col-start-1 row-start-1 h-full w-full rounded-sm object-cover lg:w-80"
+              alt={props.title || 'Article cover image'}
+              className="col-start-1 row-start-1 h-72 w-full rounded-sm object-cover object-top lg:w-80"
             />
           </div>
           <div className="max-w-sm items-center gap-2 self-center p-2 pr-4">
@@ -83,13 +83,18 @@ function ArticleCard(props: ArticleCardProps) {
             <a
               href={props.path}
               target="_blank"
+              rel="noopener noreferrer"
               className="text-white no-underline hover:text-blue-100 hover:no-underline dark:text-white dark:hover:text-blue-50">
               {sanitizeHtml(props.title)}
             </a>
           </h3>
           {parse(abbrSubtitle)}
           <PublishDate date={props.date} styles="row-start-1 col-start-1 z-10 my-2" />
-          <img src={props.imgSrc || fallbackImage} className="object-fit col-start-1 row-start-1 rounded-sm" />
+          <img
+            src={props.imgSrc || fallbackImage}
+            alt={props.title || 'Article cover image'}
+            className="col-start-1 row-start-1 h-72 w-full rounded-sm object-cover object-top"
+          />
           <p className="text-purple-700">
             By: <a href={props.author_link}>{props.display_name}</a>
           </p>
